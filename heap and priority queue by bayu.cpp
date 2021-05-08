@@ -1,9 +1,10 @@
 #include "iostream"
 #include "conio.h"
-
 #define max 10
 using namespace std;
-
+//I Putu Gede Bayu Raditya Pratama
+//200030409
+//BD203
 struct queue {
 	int data[max];
 	int head;
@@ -79,10 +80,10 @@ int removeMin() {
 
 	int l = 0;
 	int h = 1;
-	if (bayu.tail == -1) {
+	if (isEmpty()==true) {
 		cout << "data sudah kosong" << endl;
 	}
-	else if (bayu.tail != -1) {
+	else if (isEmpty()!=true) {
 		do {
 			bayu.key[l] = bayu.key[h];
 			bayu.data[l] = bayu.data[h];
@@ -110,24 +111,42 @@ void cetak() {
 	}
 	else {
 
-	cout << "key" << "   data" << endl;
-	for (int a = 0; a <= bayu.tail; a++) {
-		cout << "[" << bayu.key[a] << "]   [" << bayu.data[a] << "]" << endl;
-	}
+		cout << "key" << "   data" << endl;
+		for (int a = 0; a <= bayu.tail; a++) {
+			cout << "[" << bayu.key[a] << "]   [" << bayu.data[a] << "]" << endl;
+		}
 	}
 
 }
 
 void size() {
+	int panjang;
 	if (isEmpty() == true) {
 		cout << "antrian kosong" << endl;
 	}
 	else {
-		cout << "panjang antrian adalah: " << bayu.tail << endl;
+		panjang = bayu.tail;
+		cout << "panjang antrian adalah: " <<++panjang  << endl;
+		panjang = 0;
 	}
-	
-}
 
+}
+void getMinKey() {
+	cout << "key terkecil adalah: " << bayu.key[bayu.tail];
+}
+void getMinValue() {
+	int temp1;
+	for (int i = 0; i <= bayu.tail; i++) {
+		for (int j = i + 1; j <= bayu.tail; j++) {
+			if (bayu.data[i] > bayu.data[j]) {
+				temp1 = bayu.data[i];
+				bayu.data[i] = bayu.data[j];
+				bayu.data[j] = temp1;
+			}
+		}
+	}
+	cout << "data terkecil adalah " << bayu.data[0];
+}
 int main() {
 	Create();
 
@@ -140,7 +159,9 @@ int main() {
 		cout << "3. clear item" << endl;
 		cout << "4. size item" << endl;
 		cout << "5. cetak item" << endl;
-		cout << "6. exit" << endl;
+		cout << "6. cek key terkecil" << endl;
+		cout << "7. cek data terkecil" << endl;
+		cout << "8. exit" << endl;
 		cout << "pilih nomor: ";
 		cin >> pilih;
 		switch (pilih) {
@@ -158,7 +179,6 @@ int main() {
 			break;
 		case 4:
 			size();
-
 			_getch();
 			break;
 		case 5:
@@ -166,15 +186,24 @@ int main() {
 			_getch();
 			break;
 		case 6:
+			getMinKey();
+			_getch();
+			break;
+		case 7:
+			getMinValue();
+			_getch();
+			break;
+		case 8:
 			cout << "terimakasih, silahkan keluar" << endl;
 			_getch();
 			break;
+
 		default:
 			cout << "pilihan tidak tersedia, silahkan pilih nomor yang tersedia";
 			_getch();
 		}
 		system("cls");
-	} while (pilih != 7);
+	} while (pilih != 9);
 
 	_getch();
 	return 0;
